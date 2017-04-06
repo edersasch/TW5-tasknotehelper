@@ -1,0 +1,121 @@
+tags: $:/tags/Macro
+title: $:/plugins/AlexanderEder/taskhelper/taskhelper
+
+\define inputnewentry(project, type, placeholder, temptiddler:"$:/temp/inputnewentry", field, value)
+<$reveal type="nomatch" default="" text="""$project$""">
+<$edit-text tiddler="""$temptiddler$""" field="""$project$""" placeholder="""$placeholder$""" />
+<$fieldmangler tiddler={{$temptiddler$!!$project$}}>
+<$button class="tc-btn-invisible">
+<$action-setfield $tiddler={{$temptiddler$!!$project$}} $field="""$field$""" $value="""$value$""" />
+<$action-setfield $tiddler={{$temptiddler$!!$project$}} $field="title" $value={{$temptiddler$!!$project$}} />
+<$action-sendmessage $message="tm-add-tag" $param="""$type$""" />
+<$action-sendmessage $message="tm-add-tag" $param="""$project$""" />
+<$action-deletefield $tiddler="""$temptiddler$""" $field="""$project$""" />
+{{$:/core/images/new-button}}
+</$button>
+</$fieldmangler>
+</$reveal>
+\end
+
+\define inputnewproject(placeholder:"new project")
+<$macrocall $name="inputnewentry" project="Project" placeholder="""$placeholder$""" temptiddler="$:/temp/taskhelpernewproject" />
+\end
+
+\define inputnewtask(project: "untitled", placeholder:"new task")
+<$macrocall $name="inputnewentry" project="""$project$""" type="Task" placeholder="""$placeholder$""" temptiddler="$:/temp/taskhelpernewtask" field="state" value="next" />
+\end
+
+\define inputnewreference(project: "untitled", placeholder:"new reference")
+<$macrocall $name="inputnewentry" project="""$project$""" type="Reference" placeholder="""$placeholder$""" temptiddler="$:/temp/taskhelpernewref" />
+\end
+
+\define checkboxdone() <$checkbox field="done" checked="true" unchecked="false" default="false" />
+
+\define showentrywithdel()
+<$link><$view field="title" /></$link>
+<$button class="tc-btn-invisible" message="tm-delete-tiddler">
+{{$:/core/images/delete-button}}
+</$button>
+\end
+
+\define donenextwaitingfuture()
+<$macrocall $name="checkboxdone" />
+<$radio field="state" value="next" class="invisibleradio next">N</$radio>
+<$radio field="state" value="waiting" class="invisibleradio waiting">W</$radio>
+<$radio field="state" value="future" class="invisibleradio future">F</$radio>
+\end
+
+\define showtask()
+<div class="tc-menu-list-item">
+<$macrocall $name="donenextwaitingfuture" />
+<$macrocall $name="showentrywithdel" />
+</div>
+\end
+
+\define listtasksbystate(taskstate)
+<$list filter="[is[current]tagging[]!has[draft.of]tag[Task]!done[true]state[$taskstate$]sort[title]]">
+<$macrocall $name="showtask" />
+</$list>
+\end
+
+\define grouptasksbystate(taskstate, groupfield)
+<$list filter="[tag[Task]!has[$groupfield$]!has[draft.of]!done[true]state[$taskstate$]]">
+<$macrocall $name="showtask" />
+</$list>
+<$list filter="[has[$groupfield$]!done[true]state[$taskstate$]each[$groupfield$]sort[$groupfield$]]">
+Waiting: <$link to={{!!$groupfield$}}><$view field="""$groupfield$""" /></$link>
+<div class="tc-menu-list-subitem">
+<$list filter="[tag[Task]$groupfield${!!$groupfield$}!has[draft.of]!done[true]state[$taskstate$]]">
+<$macrocall $name="showtask" />
+</$list>
+</div>
+</$list>
+\end
+
+\define listtasks()
+<$macrocall $name="listtasksbystate" taskstate="next" />
+
+<$macrocall $name="listtasksbystate" taskstate="waiting" />
+
+<$macrocall $name="listtasksbystate" taskstate="future" />
+
+<$list filter="[is[current]tagging[]!has[draft.of]tag[Task]done[true]sort[title]]">
+<$macrocall $name="showtask" />
+</$list>
+\end
+
+\define listreferences()
+<$list filter="[is[current]tagging[]!has[draft.of]tag[Reference]sort[title]]" template="$:/core/ui/ListItemTemplate" />
+\end
+
+\define showprojectentries()
+<$macrocall $name="inputnewtask" project={{!!title}} />
+
+<$macrocall $name="listtasks" />
+
+<$macrocall $name="inputnewreference" project={{!!title}} />
+
+<$macrocall $name="listreferences" />
+
+\end
+
+\define listprojects()
+<$macrocall $name="inputnewproject" />
+
+<$list filter="[tag[Project]!has[daft.of]!done[true]sort[title]]">
+
+<$macrocall $name="checkboxdone" />
+<$link><$view field="title"/></$link> <$macrocall $name="inputnewtask" project={{!!title}} />
+
+<div class="tc-menu-list-subitem">
+<$macrocall $name="listtasksbystate" taskstate="next" />
+</div>
+
+</$list>
+<$macrocall $name="grouptasksbystate" taskstate="waiting" groupfield="contact" />
+
+<$list filter="[tag[Project]!has[daft.of]done[true]sort[title]]">
+<$macrocall $name="checkboxdone" />
+<$link><$view field="title"/></$link>
+</$list>
+\end

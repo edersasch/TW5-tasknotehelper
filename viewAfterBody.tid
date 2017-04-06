@@ -1,0 +1,11 @@
+list-after: $:/core/ui/ViewTemplate/body
+tags: $:/tags/ViewTemplate
+title: $:/plugins/AlexanderEder/taskhelper/viewAfterBody
+
+<$list filter="[is[current]tag[Project]]">
+
+<<checkboxdone>> closed
+
+<<showprojectentries>>
+
+</$list>
