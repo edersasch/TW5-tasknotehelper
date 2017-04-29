@@ -1,32 +1,12 @@
 tags: $:/tags/Macro
 title: $:/plugins/AlexanderEder/taskhelper/taskhelper
 
-\define inputnewentry(project, type, placeholder, temptiddler:"$:/temp/inputnewentry", field, value)
-<$reveal type="nomatch" default="" text="""$project$""">
-<$edit-text tiddler="""$temptiddler$""" field="""$project$""" placeholder="""$placeholder$""" />
-<$fieldmangler tiddler={{$temptiddler$!!$project$}}>
-<$button class="tc-btn-invisible">
-<$action-setfield $tiddler={{$temptiddler$!!$project$}} $field="""$field$""" $value="""$value$""" />
-<$action-setfield $tiddler={{$temptiddler$!!$project$}} $field="title" $value={{$temptiddler$!!$project$}} />
-<$action-sendmessage $message="tm-add-tag" $param="""$type$""" />
-<$action-sendmessage $message="tm-add-tag" $param="""$project$""" />
-<$action-deletefield $tiddler="""$temptiddler$""" $field="""$project$""" />
-{{$:/core/images/new-button}}
-</$button>
-</$fieldmangler>
-</$reveal>
-\end
-
-\define inputnewproject(placeholder:"new project")
-<$macrocall $name="inputnewentry" project="Project" placeholder="""$placeholder$""" temptiddler="$:/temp/taskhelpernewproject" />
-\end
-
 \define inputnewtask(project: "untitled", placeholder:"new task")
-<$macrocall $name="inputnewentry" project="""$project$""" type="Task" placeholder="""$placeholder$""" temptiddler="$:/temp/taskhelpernewtask" field="state" value="next" />
+<$macrocall $name="inputnewentry" tags="Task [[$project$]]" placeholder="$placeholder$ $project$" tmp="$:/temp/taskhelpernewtask" fields="state=next" />
 \end
 
 \define inputnewreference(project: "untitled", placeholder:"new reference")
-<$macrocall $name="inputnewentry" project="""$project$""" type="Reference" placeholder="""$placeholder$""" temptiddler="$:/temp/taskhelpernewref" />
+<$macrocall $name="inputnewentry" tags="Reference [[$project$]]" placeholder="$placeholder$ $project$" tmp="$:/temp/taskhelpernewref" />
 \end
 
 \define checkboxdone() <$checkbox field="done" checked="true" unchecked="false" default="false" />
@@ -100,7 +80,7 @@ Waiting: <$link to={{!!$groupfield$}}><$view field="""$groupfield$""" /></$link>
 \end
 
 \define listprojects()
-<$macrocall $name="inputnewproject" />
+<$macrocall $name="inputnewentry" placeholder="new project" tmp="$:/temp/taskhelpernewproject" tags="Project"/>
 
 <$list filter="[tag[Project]!has[daft.of]!done[true]sort[title]]">
 

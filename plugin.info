@@ -3,5 +3,5 @@
     "description": "taskhelper: manage projects and tasks without transforming the whole wiki",
     "author": "AlexanderEder",
     "core-version": ">=5.0.0",
-    "list": ""
+    "list": "readme"
 }
