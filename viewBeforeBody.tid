@@ -13,5 +13,5 @@ title: $:/plugins/AlexanderEder/taskhelper/viewBeforeBody
 <$reveal type="nomatch" text="" default={{!!contact}}>
 <$link to={{!!contact}}>{{$:/core/images/advanced-search-button}}</$link>
 </$reveal>
-<$macrocall $name="inputnewentry" project="Contact" placeholder="new contact" temptiddler="$:/temp/taskhelpernewcontact" />
+<$macrocall $name="inputnewentry" tags="Contact" placeholder="new contact" temptiddler="$:/temp/taskhelpernewcontact" />
 </$list>

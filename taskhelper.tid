@@ -38,12 +38,12 @@ title: $:/plugins/AlexanderEder/taskhelper/taskhelper
 </$list>
 \end
 
-\define grouptasksbystate(taskstate, groupfield)
+\define grouptasksbystate(taskstate, groupfield, hint: "Group")
 <$list filter="[tag[Task]!has[$groupfield$]!has[draft.of]!done[true]state[$taskstate$]]">
 <$macrocall $name="showtask" />
 </$list>
 <$list filter="[has[$groupfield$]!done[true]state[$taskstate$]each[$groupfield$]sort[$groupfield$]]">
-Waiting: <$link to={{!!$groupfield$}}><$view field="""$groupfield$""" /></$link>
+"""$hint$""": <$link to={{!!$groupfield$}}><$view field="""$groupfield$""" /></$link>
 <div class="tc-menu-list-subitem">
 <$list filter="[tag[Task]$groupfield${!!$groupfield$}!has[draft.of]!done[true]state[$taskstate$]]">
 <$macrocall $name="showtask" />
@@ -92,7 +92,7 @@ Waiting: <$link to={{!!$groupfield$}}><$view field="""$groupfield$""" /></$link>
 </div>
 
 </$list>
-<$macrocall $name="grouptasksbystate" taskstate="waiting" groupfield="contact" />
+<$macrocall $name="grouptasksbystate" taskstate="waiting" groupfield="contact" hint="Waiting" />
 
 <$list filter="[tag[Project]!has[daft.of]done[true]sort[title]]">
 <$macrocall $name="checkboxdone" />
