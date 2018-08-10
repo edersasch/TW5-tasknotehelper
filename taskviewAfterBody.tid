@@ -1,6 +1,6 @@
 list-after: $:/core/ui/ViewTemplate/body
 tags: $:/tags/ViewTemplate
-title: $:/plugins/AlexanderEder/taskhelper/viewAfterBody
+title: $:/plugins/AlexanderEder/taskhelper/taskviewAfterBody
 
 <$list filter="[is[current]tag[Project]]">
 

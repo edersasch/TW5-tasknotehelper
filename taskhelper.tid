@@ -2,14 +2,14 @@ tags: $:/tags/Macro
 title: $:/plugins/AlexanderEder/taskhelper/taskhelper
 
 \define inputnewtask(project: "untitled", placeholder:"new task")
-<$macrocall $name="inputnewentry" tags="Task [[$project$]]" placeholder="$placeholder$ $project$" tmp="$:/temp/taskhelpernewtask" fields="state=next" />
+<$macrocall $name="inputnewentry" tags="Task [[$project$]]" placeholder="$placeholder$ $project$" tmp="$:/temp/taskhelpernewtask" fields="state=next"/>
 \end
 
 \define inputnewreference(project: "untitled", placeholder:"new reference")
-<$macrocall $name="inputnewentry" tags="Reference [[$project$]]" placeholder="$placeholder$ $project$" tmp="$:/temp/taskhelpernewref" />
+<$macrocall $name="inputnewentry" tags="Reference [[$project$]]" placeholder="$placeholder$ $project$" tmp="$:/temp/taskhelpernewref"/>
 \end
 
-\define checkboxdone() <$checkbox field="done" checked="true" unchecked="false" default="false" />
+\define checkboxdone() <$checkbox field="done" checked="true" unchecked="false" default="false"/>
 
 \define showentrywithdel()
 <$link><$view field="title" /></$link>
@@ -19,7 +19,7 @@ title: $:/plugins/AlexanderEder/taskhelper/taskhelper
 \end
 
 \define donenextwaitingfuture()
-<$macrocall $name="checkboxdone" />
+<$macrocall $name="checkboxdone"/>
 <$radio field="state" value="next" class="invisibleradio next">N</$radio>
 <$radio field="state" value="waiting" class="invisibleradio waiting">W</$radio>
 <$radio field="state" value="future" class="invisibleradio future">F</$radio>
@@ -27,37 +27,37 @@ title: $:/plugins/AlexanderEder/taskhelper/taskhelper
 
 \define showtask()
 <div class="tc-menu-list-item">
-<$macrocall $name="donenextwaitingfuture" />
-<$macrocall $name="showentrywithdel" />
+<$macrocall $name="donenextwaitingfuture"/>
+<$macrocall $name="showentrywithdel"/>
 </div>
 \end
 
-\define listtasksbystate(taskstate)
-<$list filter="[is[current]tagging[]!has[draft.of]tag[Task]!done[true]state[$taskstate$]sort[title]]">
-<$macrocall $name="showtask" />
+\define listtasksbystate(taskstate:"none", project:"noproject")
+<$list filter="[is[current]tagging[]!has[draft.of]tag[Task]!done[true]state[$taskstate$]search{$:/temp/taskhelpernewtask!!new task $project$}sort[title]]">
+<$macrocall $name="showtask"/>
 </$list>
 \end
 
 \define grouptasksbystate(taskstate, groupfield, hint: "Group")
 <$list filter="[tag[Task]!has[$groupfield$]!has[draft.of]!done[true]state[$taskstate$]]">
-<$macrocall $name="showtask" />
+<$macrocall $name="showtask"/>
 </$list>
 <$list filter="[has[$groupfield$]!done[true]state[$taskstate$]each[$groupfield$]sort[$groupfield$]]">
-"""$hint$""": <$link to={{!!$groupfield$}}><$view field="""$groupfield$""" /></$link>
+"""$hint$""": <$link to={{!!$groupfield$}}><$view field="""$groupfield$"""/></$link>
 <div class="tc-menu-list-subitem">
 <$list filter="[tag[Task]$groupfield${!!$groupfield$}!has[draft.of]!done[true]state[$taskstate$]]">
-<$macrocall $name="showtask" />
+<$macrocall $name="showtask"/>
 </$list>
 </div>
 </$list>
 \end
 
-\define listtasks()
-<$macrocall $name="listtasksbystate" taskstate="next" />
+\define listtasks(project:"noproject)
+<$macrocall $name="listtasksbystate" taskstate="next" project="""$project$"""/>
 
-<$macrocall $name="listtasksbystate" taskstate="waiting" />
+<$macrocall $name="listtasksbystate" taskstate="waiting" project="""$project$"""/>
 
-<$macrocall $name="listtasksbystate" taskstate="future" />
+<$macrocall $name="listtasksbystate" taskstate="future" project="""$project$"""/>
 
 <$list filter="[is[current]tagging[]!has[draft.of]tag[Task]done[true]sort[title]]">
 <$macrocall $name="showtask" />
@@ -65,17 +65,17 @@ title: $:/plugins/AlexanderEder/taskhelper/taskhelper
 \end
 
 \define listreferences()
-<$list filter="[is[current]tagging[]!has[draft.of]tag[Reference]sort[title]]" template="$:/core/ui/ListItemTemplate" />
+<$list filter="[is[current]tagging[]!has[draft.of]tag[Reference]sort[title]]" template="$:/core/ui/ListItemTemplate"/>
 \end
 
 \define showprojectentries()
-<$macrocall $name="inputnewtask" project={{!!title}} />
+<$macrocall $name="inputnewtask" project={{!!title}}/>
 
-<$macrocall $name="listtasks" />
+<$macrocall $name="listtasks" project={{!!title}}/>
 
-<$macrocall $name="inputnewreference" project={{!!title}} />
+<$macrocall $name="inputnewreference" project={{!!title}}/>
 
-<$macrocall $name="listreferences" />
+<$macrocall $name="listreferences"/>
 
 \end
 
@@ -85,17 +85,17 @@ title: $:/plugins/AlexanderEder/taskhelper/taskhelper
 <$list filter="[tag[Project]!has[daft.of]!done[true]sort[title]]">
 
 <$macrocall $name="checkboxdone" />
-<$link><$view field="title"/></$link> <$macrocall $name="inputnewtask" project={{!!title}} />
+<$link><$view field="title"/></$link> <$macrocall $name="inputnewtask" project={{!!title}}/>
 
 <div class="tc-menu-list-subitem">
-<$macrocall $name="listtasksbystate" taskstate="next" />
+<$macrocall $name="listtasksbystate" taskstate="next" project={{!!title}}/>
 </div>
 
 </$list>
-<$macrocall $name="grouptasksbystate" taskstate="waiting" groupfield="contact" hint="Waiting" />
+<$macrocall $name="grouptasksbystate" taskstate="waiting" groupfield="contact" hint="Waiting"/>
 
 <$list filter="[tag[Project]!has[daft.of]done[true]sort[title]]">
-<$macrocall $name="checkboxdone" />
+<$macrocall $name="checkboxdone"/>
 <$link><$view field="title"/></$link>
 </$list>
 \end

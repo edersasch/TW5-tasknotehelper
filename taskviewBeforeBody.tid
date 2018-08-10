@@ -1,0 +1,18 @@
+list-before: $:/core/ui/ViewTemplate/body
+tags: $:/tags/ViewTemplate
+title: $:/plugins/AlexanderEder/taskhelper/taskviewBeforeBody
+
+<$list filter="[is[current]tag[Task]]">
+<<donenextwaitingfuture>>
+<$macrocall $name="inputnewentry" tags="Contact" placeholder="contact" tmp=<<currentTiddler>> keepafteradd="yes"/>
+<$reveal tag="div" class="tc-block-dropdown" state=<<qualify "$:/state/popup/inputnewentry">> type="nomatch" text="" default="">
+<$list filter="[tag[Contact]search:title{!!contact}]" variable="contactTiddler">
+<div class="tc-menu-list-subitem">
+<$button class="tc-btn-invisible">
+<$action-setfield $tiddler=<<currentTiddler>> $field="contact" $value=<<contactTiddler>>/>
+<<contactTiddler>>
+</$button>
+</div>
+</$list>
+</$reveal>
+</$list>
