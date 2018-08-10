@@ -1,6 +1,6 @@
 list-before: $:/core/ui/ViewTemplate/body
 tags: $:/tags/ViewTemplate
-title: $:/plugins/AlexanderEder/taskhelper/taskviewBeforeBody
+title: $:/plugins/AlexanderEder/tasknotehelper/taskviewBeforeBody
 
 <$list filter="[is[current]tag[Task]]">
 <<donenextwaitingfuture>>

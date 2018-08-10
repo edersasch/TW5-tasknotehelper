@@ -1,0 +1,55 @@
+tags: $:/tags/Macro
+title: $:/plugins/AlexanderEder/tasknotehelper/notehelper
+
+\define listitemswithfield(category:"unspecified", field:"attribute")
+<$list filter="[tag[$category$]tagging[]has[$field$]!has[draft.of]sort[title]]">
+<div class="tc-menu-list-subitem">
+<$button class="tc-btn-invisible" set="""!!$field$""" setTo="">
+{{$:/core/images/save-button}}
+</$button>
+<$edit-text field="""$field$""" size="10" />
+<$set name="categoryentry" filter="[title{!!title}tags[]]">
+<$link>{{!!title}}</$link> (<<categoryentry>>)
+</$set>
+</div>
+</$list>
+\end
+
+\define itemattributetextedit(field:"nofield", fieldplaceholder:"attributevalue")
+<$button class="tc-btn-invisible">
+<$action-setfield $field$={{!!draft.$field$}} />
+<$action-deletefield $field="""draft.$field$""" />
+{{$:/core/images/export-button}}
+</$button>
+<$edit-text field="""draft.$field$""" size="10" placeholder="""$fieldplaceholder$"""/> 
+\end
+
+\define showitem(field:"nofield", fieldplaceholder:"attributevalue")
+<$reveal type="nomatch" default="nofield" text="""$field$""">
+<$macrocall $name="itemattributetextedit" field="""$field$""" fieldplaceholder="""$fieldplaceholder$"""/>
+</$reveal>
+<$macrocall $name="showentrywithdel"/>
+\end
+
+\define listitems(subcategory:"untitled", filterfield:"nofield", field:"nofield", fieldplaceholder:"attributevalue")
+<$list filter="[tag[$subcategory$]!has[$field$]!has[draft.of]search{$:/temp/listitems!!$filterfield$}sort[title]]">
+<div class="tc-menu-list-subitem">
+<$macrocall $name="showitem" field="""$field$""" fieldplaceholder="""$fieldplaceholder$"""/>
+</div>
+</$list>
+\end
+
+\define showsubcategory(subcategory:"untitled", placeholder:"new ...", field:"nofield", fieldplaceholder:"attributevalue")
+!<$link><$view format="text" tiddler="""$subcategory$""" field="title" /></$link>
+<$macrocall $name="inputnewentry" tmp="$:/temp/listitems" tags="[[$subcategory$]]" placeholder="$placeholder$ $subcategory$"/>
+
+<$macrocall $name="listitems" subcategory="""$subcategory$""" filterfield="$placeholder$ $subcategory$" field="""$field$""" fieldplaceholder="""$fieldplaceholder$"""/>
+\end
+
+\define listsubcategories(category:"unspecified", placeholder:"new ..." field:"nofield", fieldplaceholder:"attributevalue")
+<$list filter="[tag[$category$]!has[draft.of]sort[title]]">
+
+<$macrocall $name="showsubcategory" subcategory={{!!title}} placeholder="""$placeholder$""" field="""$field$""" fieldplaceholder="""$fieldplaceholder$"""/>
+
+</$list>
+\end

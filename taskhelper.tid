@@ -1,5 +1,5 @@
 tags: $:/tags/Macro
-title: $:/plugins/AlexanderEder/taskhelper/taskhelper
+title: $:/plugins/AlexanderEder/tasknotehelper/taskhelper
 
 \define inputnewtask(project: "untitled", placeholder:"new task")
 <$macrocall $name="inputnewentry" tags="Task [[$project$]]" placeholder="$placeholder$ $project$" tmp="$:/temp/taskhelpernewtask" fields="state=next"/>
@@ -10,13 +10,6 @@ title: $:/plugins/AlexanderEder/taskhelper/taskhelper
 \end
 
 \define checkboxdone() <$checkbox field="done" checked="true" unchecked="false" default="false"/>
-
-\define showentrywithdel()
-<$link><$view field="title" /></$link>
-<$button class="tc-btn-invisible" message="tm-delete-tiddler">
-{{$:/core/images/delete-button}}
-</$button>
-\end
 
 \define donenextwaitingfuture()
 <$macrocall $name="checkboxdone"/>
@@ -52,20 +45,20 @@ title: $:/plugins/AlexanderEder/taskhelper/taskhelper
 </$list>
 \end
 
-\define listtasks(project:"noproject)
+\define listtasks(project:"noproject")
 <$macrocall $name="listtasksbystate" taskstate="next" project="""$project$"""/>
 
 <$macrocall $name="listtasksbystate" taskstate="waiting" project="""$project$"""/>
 
 <$macrocall $name="listtasksbystate" taskstate="future" project="""$project$"""/>
 
-<$list filter="[is[current]tagging[]!has[draft.of]tag[Task]done[true]sort[title]]">
+<$list filter="[is[current]tagging[]!has[draft.of]tag[Task]done[true]search{$:/temp/taskhelpernewtask!!new task $project$}sort[title]]">
 <$macrocall $name="showtask" />
 </$list>
 \end
 
-\define listreferences()
-<$list filter="[is[current]tagging[]!has[draft.of]tag[Reference]sort[title]]" template="$:/core/ui/ListItemTemplate"/>
+\define listreferences(project:"noproject")
+<$list filter="[is[current]tagging[]!has[draft.of]tag[Reference]search{$:/temp/taskhelpernewref!!new reference $project$}sort[title]]" template="$:/core/ui/ListItemTemplate"/>
 \end
 
 \define showprojectentries()
@@ -75,7 +68,7 @@ title: $:/plugins/AlexanderEder/taskhelper/taskhelper
 
 <$macrocall $name="inputnewreference" project={{!!title}}/>
 
-<$macrocall $name="listreferences"/>
+<$macrocall $name="listreferences" project={{!!title}}/>
 
 \end
 

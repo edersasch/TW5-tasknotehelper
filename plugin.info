@@ -1,6 +1,6 @@
 {
-    "title": "$:/plugins/AlexanderEder/taskhelper",
-    "description": "taskhelper: manage projects and tasks without transforming the whole wiki",
+    "title": "$:/plugins/AlexanderEder/tasknotehelper",
+    "description": "tasknotehelper: manage projects, tasks and notes without transforming the whole wiki",
     "author": "AlexanderEder",
     "core-version": ">=5.0.0",
     "list": "readme"
