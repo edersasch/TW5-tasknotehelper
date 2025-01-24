@@ -1,0 +1,15 @@
+created: 20250123160503180
+modified: 20250123214818017
+tags: Tasknotehelper
+title: Notes
+type: text/vnd.tiddlywiki
+
+The input field below uses the same `<<inputnewentry>>` macro as
+the one to add a new tab on the [[Tasknotehelper]] tiddler.
+
+This is followed by the `<<listsubcategories>>` macro that
+lists all your note categories and their corresponding notes.
+
+<<inputnewentry tags:"Note" placeholder:"New Category">>
+
+<<listsubcategories Note "New Note">>

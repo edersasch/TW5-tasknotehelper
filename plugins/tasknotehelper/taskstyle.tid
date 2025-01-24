@@ -1,5 +1,5 @@
 tags: $:/tags/Stylesheet
-title: $:/plugins/AlexanderEder/tasknotehelper/taskstyle
+title: $:/plugins/edersasch/tasknotehelper/taskstyle
 
 .invisibleradio input[type="radio"] {
   display: none;

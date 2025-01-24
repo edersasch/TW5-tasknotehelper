@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/AlexanderEder/tasknotehelper/inputnewentry.js
+title: $:/plugins/edersasch/tasknotehelper/inputnewentry.js
 type: application/javascript
 module-type: macro
 

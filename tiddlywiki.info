@@ -1,0 +1,35 @@
+{
+    "plugins": [
+    ],
+
+    "themes": [
+        "tiddlywiki/vanilla",
+        "tiddlywiki/snowwhite"
+    ],
+
+    "build": {
+        "serve": [
+            "--listen"
+        ],
+        "index": [
+            "--render",
+            "$:/core/save/all",
+            "index.html",
+            "text/plain"
+        ],
+        "test": [
+            "--render",
+            "$:/core/save/all",
+            "test.html",
+            "text/plain",
+            "--test"
+        ],
+        "license": [
+            "--render",
+            "$:/plugins/edersasch/tasknotehelper/license",
+            "LICENSE",
+            "text/plain",
+            "$:/core/templates/plain-text-tiddler"
+        ]
+    }
+}

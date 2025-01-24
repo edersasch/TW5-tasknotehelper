@@ -1,0 +1,22 @@
+created: 20250123160541763
+modified: 20250128153746214
+tags: Tasknotehelper
+title: Projects
+type: text/vnd.tiddlywiki
+
+The only thing needed to start adding projects and tasks is the
+`<<listprojects>>` macro.
+
+Please note that changing a task to state "future" turns it to an optional idea which you should not focus on now, so it is removed from the project task view.
+It is added to [[Ideas]], where all your thoughts for later are collected.
+
+A task has a contact field. If you enter a name and press the appearing plus icon on the right
+you add a new contact. While typing you narrow a list of already existing contacts.
+If you select one, you can press the link icon to see the information you stored for that person.
+Tasks in state "waiting" are grouped by contact, so they should have one.
+
+The checkbox in front of a task or project marks it as completed.
+Completed projects are shown at the bottom of the project list,
+completed tasks show up on their project page.
+
+<<listprojects>>

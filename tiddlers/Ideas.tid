@@ -1,0 +1,12 @@
+created: 20250123163227484
+modified: 20250123212721378
+tags: Tasknotehelper
+title: Ideas
+type: text/vnd.tiddlywiki
+
+All the tasks that are set to state "future" are listed here.
+They disappear on purpose from a project's task list, because you should only see
+what you can do next. Clicking on a task gives you the opportunity to change
+the state to "waiting" or "next", so it shows up again in the project overview.
+
+<<list-links filter:"[tag[Task]state[future]]">>

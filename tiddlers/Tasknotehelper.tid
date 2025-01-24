@@ -1,0 +1,19 @@
+created: 20250123151651070
+modified: 20250123212353050
+tags: 
+title: Tasknotehelper
+type: text/vnd.tiddlywiki
+
+Please install the plugin by drag and drop import:
+
+[[$:/plugins/edersasch/tasknotehelper]]
+
+Below is an input field as an example how to use the `<<inputnewentry>>`
+macro to add new tabs.
+
+<<inputnewentry tags:"Tasknotehelper" placeholder:"New Tab">>
+
+
+The tabs "Ideas", "Notes" and "Projects" show what else can be done with the plugin.
+
+<<tabs "[is[current]tagging[]]" "Notes" "$:/state/tabs/tasknotehelper">>

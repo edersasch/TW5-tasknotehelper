@@ -1,5 +1,5 @@
 tags: $:/tags/Macro
-title: $:/plugins/AlexanderEder/tasknotehelper/common
+title: $:/plugins/edersasch/tasknotehelper/common
 
 \define showentrywithdel()
 <$link><$view field="title" /></$link>

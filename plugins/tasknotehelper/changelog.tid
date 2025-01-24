@@ -1,0 +1,21 @@
+title: $:/plugins/edersasch/tasknotehelper/changelog
+
+All notable changes to this plugin and its accompanying info will be
+documented here.
+
+The format is based on
+[[Keep a Changelog|https://keepachangelog.com/en/1.1.0/]].
+The versioning scheme is<br>
+`yyyy.[releasenumber].[qualityindex]`
+e.g. "2025.2.Beta1" means that this is the first Beta for the first
+release in the year 2025.
+
+
+! 2025.1.0 - unreleased
+
+
+!! Added
+
+* Task and project handling
+* Note handling with categories and entries,<br>can also be used to create tabs
+* Readme and example to try

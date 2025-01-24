@@ -1,5 +1,5 @@
 tags: $:/tags/Macro
-title: $:/plugins/AlexanderEder/tasknotehelper/notehelper
+title: $:/plugins/edersasch/tasknotehelper/notehelper
 
 \define listitemswithfield(category:"unspecified", field:"attribute")
 <$list filter="[tag[$category$]tagging[]has[$field$]!has[draft.of]sort[title]]">
@@ -40,8 +40,7 @@ title: $:/plugins/AlexanderEder/tasknotehelper/notehelper
 \end
 
 \define showsubcategory(subcategory:"untitled", placeholder:"new ...", field:"nofield", fieldplaceholder:"attributevalue")
-!<$link><$view format="text" tiddler="""$subcategory$""" field="title" /></$link>
-<$macrocall $name="inputnewentry" tmp="$:/temp/listitems" tags="[[$subcategory$]]" placeholder="$placeholder$ $subcategory$"/>
+<$link><$view format="text" tiddler="""$subcategory$""" field="title" /></$link> <$macrocall $name="inputnewentry" tmp="$:/temp/listitems" tags="[[$subcategory$]]" placeholder="$placeholder$ $subcategory$"/>
 
 <$macrocall $name="listitems" subcategory="""$subcategory$""" filterfield="$placeholder$ $subcategory$" field="""$field$""" fieldplaceholder="""$fieldplaceholder$"""/>
 \end

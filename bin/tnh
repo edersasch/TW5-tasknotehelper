@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# To be called from inside a TiddlyWikiFolder, see https://tiddlywiki.com/#TiddlyWikiFolders
+
+TWJS="/home/sascha/opt/sw/TW5/tiddlywiki.js"
+
+if [ -z "$1" ]; then
+    "$TWJS" --help
+    exit 1
+fi
+
+CMD="$1"
+shift
+
+case "$CMD" in
+"test")
+    "$TWJS" +plugins/tiddlywiki/tiddlyweb +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/jasmine --build test
+    ;;
+"serve")
+    "$TWJS" +plugins/tiddlywiki/tiddlyweb +plugins/tiddlywiki/filesystem --build "$CMD" "$@"
+    ;;
+"index" | "license")
+    "$TWJS" --build "$CMD" "$@"
+    ;;
+*)
+    "$TWJS" "$CMD" "$@"
+    ;;
+esac

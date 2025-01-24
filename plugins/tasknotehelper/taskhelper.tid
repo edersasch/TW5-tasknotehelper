@@ -1,5 +1,5 @@
 tags: $:/tags/Macro
-title: $:/plugins/AlexanderEder/tasknotehelper/taskhelper
+title: $:/plugins/edersasch/tasknotehelper/taskhelper
 
 \define inputnewtask(project: "untitled", placeholder:"new task")
 <$macrocall $name="inputnewentry" tags="Task [[$project$]]" placeholder="$placeholder$ $project$" tmp="$:/temp/taskhelpernewtask" fields="state=next"/>
