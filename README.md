@@ -21,7 +21,7 @@ and you will see all tiddlers that are tagged with "Note" and an additional
 edit field to create tiddlers that are tagged with the name of the tiddler they
 are created under.
 
-Please try the [demo](https://pivotal-stereo-34.tiddlyhost.com)
+Please try the [demo](https://stumpy-dirge-86.tiddlyhost.com/)
 and check the
 [changelog](plugins/tasknotehelper/changelog.tid)
 (tiddler format).
